@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Food Blog</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+
+    <!-- Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app" class="container mt-4">
+
+        <!-- Navbar Component -->
+        <nav-bar></nav-bar>
+
+        <div class="row">
+            <div class="col-md-3">
+                <aside id="leftside"></aside>
+            </div>
+            <div class="col-md-9">
+                <aside id="rightside"></aside>
+
+                <div id="container">
+                    <header><span>Food Blog</span></header>
+
+                    <main>
+                        <!-- Vue Component for Image -->
+                        <chili-image></chili-image>
+
+                        <h2 class="mt-4">Comments</h2>
+
+                        <section id="blogposts">
+                            <div class="post" v-for="(comment, index) in comments" :key="index">
+                                <span class="author">{{ comment.author }}</span> —
+                                <span class="date">{{ comment.date }}</span>
+                                <span class="reply">REPLY</span>
+                                <p>{{ comment.text }}</p>
+                                <img
+                                    :src="comment.profileImage"
+                                    class="profile-img"
+                                    @click="openProfile(comment)"
+                                    alt="Profile Picture"
+                                >
+                            </div>
+                        </section>
+                    </main>
+
+                    <!-- Floating Profile Box -->
+                    <div class="floating-box" :class="{ active: showProfile }">
+                        <h3>{{ selectedAuthor.name }}</h3>
+                        <p><strong>Foodie Level:</strong> {{ selectedAuthor.foodieLevel }}</p>
+                        <p>{{ selectedAuthor.bio }}</p>
+                        <button class="close-btn" @click="closeProfile">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="text-center mt-4">
+            &copy; Copyright FOOD BLOG
+        </footer>
+    </div>
+
+    <!-- Vue.js Scripts -->
+    <script src="app.js"></script>
+
+    <!-- Bootstrap 4 JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
